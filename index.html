@@ -4,30 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Integration</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevent scrolling */
-        }
-
-        /* Style the iframe to occupy the full page */
-        iframe {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Add your CSS styles -->
 </head>
-<body>     
+<body>
+    
+<div class="chat-container">
+    <div class="chat-header">
+        <!-- You can place your menu or any other content here -->
+    </div>
+    <div class="chat-output" id="chatOutput"></div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
 
-<!-- Chatbot Embedding -->
-<iframe
- src="https://udify.app/chatbot/YroDnyRrYDQx0ft7"
- allow="microphone">
-</iframe>
+<script src="script.js"></script>
 
 </body>
 </html>
+
