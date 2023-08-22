@@ -1,0 +1,7 @@
+{
+    "editor.defaultColorDecorators": false,
+    "editor.defaultFormatter": "GitHub.copilot",
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.preferredDarkColorTheme": "Monokai",
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiBlue"
+}
