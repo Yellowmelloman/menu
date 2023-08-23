@@ -1,20 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Integration</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Add your CSS styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    
-<div class="chat-container">
-    <div class="chat-output" id="chatOutput"></div>
-    <input type="text" id="userInput" placeholder="Ask something...">
-    <button onclick="sendMessage()">Send</button>
-</div>
 
-<script src="script.js"></script>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <!-- You can place your menu or any other content here -->
+        </div>
+        <div class="chat-output" id="chatOutput"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'app-RuMo6lm9dUR6XESVGfEhSTaT';
+        const API_ENDPOINT = 'https://api.dify.dev/v1/chat-messages';
+        let conversation_id = null;
+
+        function sendMessage() {
+            console.log("sendMessage function called!");
+
+            const inputElem = document.getElementById('userInput');
+            const message = inputElem.value;
+            if (message.trim() === '') return;
+            const chatOutputElem = document.getElementById('chatOutput');
+            chatOutputElem.innerHTML += `<div class="user-message">${message}</div>`;
+            const payload = {
+                inputs: {},
+                query: message,
+                response_mode: "streaming",
+                user: "abc-123"
+            };
+            if (conversation_id) {
+                payload.conversation_id = conversation_id;
+            }
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.conversation_id) {
+                    conversation_id = data.conversation_id;
+                }
+                chatOutputElem.innerHTML += `<div class="bot-message">${data.message.text}</div>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                chatOutputElem.innerHTML += `<div class="error-message">Error sending message.</div>`;
+            });
+            inputElem.value = '';
+        }
+    </script>
 
 </body>
+
 </html>
