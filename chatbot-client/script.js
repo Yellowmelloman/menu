@@ -1,4 +1,4 @@
-const API_KEY = 'app-rUFZONvPMZWBFqD8nDaRhLXt';
+const API_KEY = 'app-RuMo6lm9dUR6XESVGfEhSTaT';
 const API_ENDPOINT = 'https://api.dify.dev/v1/chat-messages';
 let conversation_id = null; // to store the conversation ID
 
@@ -6,7 +6,13 @@ function sendMessage() {
     const inputElem = document.getElementById('userInput');
     const message = inputElem.value;
 
+    if (!message) {
+        console.log("there is no message")
+     }
+
     if (message.trim() === '') return;
+
+
 
     const chatOutputElem = document.getElementById('chatOutput');
     chatOutputElem.innerHTML += `<div class="user-message">${message}</div>`;
